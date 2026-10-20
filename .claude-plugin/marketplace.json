@@ -1,0 +1,15 @@
+{
+  "name": "script-to-video",
+  "description": "Script to Video: make finished, low-cost narrated videos from any script.",
+  "owner": {
+    "name": "Topnotch1851",
+    "url": "https://github.com/Topnotch1851"
+  },
+  "plugins": [
+    {
+      "name": "script-to-video",
+      "source": "./",
+      "description": "Turn any script into a finished narrated video (vertical or landscape, still or animated, any style) at a quoted low cost."
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "_note": "Unit prices on fal.ai, checked 2026-10-20 with get_pricing. The skill re-checks live prices before every quote; edit here if they change.",
+  "picture":   {"endpoint": "fal-ai/nano-banana-2/edit", "unit": "image", "price": 0.08},
+  "picture_t2i": {"endpoint": "fal-ai/nano-banana-2", "unit": "image", "price": 0.08},
+  "animation": {"endpoint": "minimax/h3-max-turbo/image-to-video", "unit": "second", "price": 0.01625, "billed_overrun": 1.036},
+  "voice":     {"endpoint": "fal-ai/elevenlabs/tts/eleven-v3", "unit": "1000 characters", "price": 0.10},
+  "music":     {"endpoint": "fal-ai/lyria3/pro", "unit": "track", "price": 0.08}
+}

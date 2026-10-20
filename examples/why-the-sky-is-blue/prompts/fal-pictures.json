@@ -1,0 +1,86 @@
+[
+ {
+  "index": 1,
+  "endpoint_id": "fal-ai/nano-banana-2/edit",
+  "input": {
+   "prompt": "Draw a NEW picture.\n\nImage 1 is a LAYOUT GUIDE ONLY. Make the main subject the same SIZE and POSITION as the grey shape in Image 1: same height on the canvas, centred horizontally, resting on the same ground line. Do not copy its shape, colours or plain background.\n\nScene: A wide open sky over gentle green hills, with a child's kite flying high. The kite is the main subject, centred.\n\nThe picture is one continuous scene that fills the WHOLE canvas evenly from the top edge to the bottom edge with detail all the way to the edges: no bands, no panels, no faded or blurred strips, no borders, no frames, no empty boxes, no split screens.\n\nStyle: clean flat vector illustration, geometric shapes, soft gradients allowed only in the background, limited modern palette of sky blue, sunset orange and warm white, crisp edges, friendly rounded shapes.\n\nNo text, no letters, no numbers, no symbols, no logos, no writing anywhere, including on signs, books, screens, paper, clothing and flags.",
+   "image_urls": [
+    "{GUIDE_URL}"
+   ],
+   "aspect_ratio": "9:16",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  }
+ },
+ {
+  "index": 2,
+  "endpoint_id": "fal-ai/nano-banana-2/edit",
+  "input": {
+   "prompt": "Draw a NEW picture.\n\nImage 1 is a LAYOUT GUIDE ONLY. Make the main subject the same SIZE and POSITION as the grey shape in Image 1: same height on the canvas, centred horizontally, resting on the same ground line. Do not copy its shape, colours or plain background.\n\nScene: A bright sun shining a white beam into a glass prism on a table, the beam spreading into a rainbow fan. The prism is centred.\n\nThe picture is one continuous scene that fills the WHOLE canvas evenly from the top edge to the bottom edge with detail all the way to the edges: no bands, no panels, no faded or blurred strips, no borders, no frames, no empty boxes, no split screens.\n\nStyle: clean flat vector illustration, geometric shapes, soft gradients allowed only in the background, limited modern palette of sky blue, sunset orange and warm white, crisp edges, friendly rounded shapes.\n\nNo text, no letters, no numbers, no symbols, no logos, no writing anywhere, including on signs, books, screens, paper, clothing and flags.",
+   "image_urls": [
+    "{GUIDE_URL}"
+   ],
+   "aspect_ratio": "9:16",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  }
+ },
+ {
+  "index": 3,
+  "endpoint_id": "fal-ai/nano-banana-2/edit",
+  "input": {
+   "prompt": "Draw a NEW picture.\n\nImage 1 is a LAYOUT GUIDE ONLY. Make the main subject the same SIZE and POSITION as the grey shape in Image 1: same height on the canvas, centred horizontally, resting on the same ground line. Do not copy its shape, colours or plain background.\n\nScene: A close-up of the air drawn as tiny round particles with coloured light rays bouncing off them in all directions. A cluster of particles in the centre.\n\nThe picture is one continuous scene that fills the WHOLE canvas evenly from the top edge to the bottom edge with detail all the way to the edges: no bands, no panels, no faded or blurred strips, no borders, no frames, no empty boxes, no split screens.\n\nStyle: clean flat vector illustration, geometric shapes, soft gradients allowed only in the background, limited modern palette of sky blue, sunset orange and warm white, crisp edges, friendly rounded shapes.\n\nNo text, no letters, no numbers, no symbols, no logos, no writing anywhere, including on signs, books, screens, paper, clothing and flags.",
+   "image_urls": [
+    "{GUIDE_URL}"
+   ],
+   "aspect_ratio": "9:16",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  }
+ },
+ {
+  "index": 4,
+  "endpoint_id": "fal-ai/nano-banana-2/edit",
+  "input": {
+   "prompt": "Draw a NEW picture.\n\nImage 1 is a LAYOUT GUIDE ONLY. Make the main subject the same SIZE and POSITION as the grey shape in Image 1: same height on the canvas, centred horizontally, resting on the same ground line. Do not copy its shape, colours or plain background.\n\nScene: A person standing in a field looking up, many blue light rays arriving from every part of the sky. The person is seen from behind, centred.\n\nThe picture is one continuous scene that fills the WHOLE canvas evenly from the top edge to the bottom edge with detail all the way to the edges: no bands, no panels, no faded or blurred strips, no borders, no frames, no empty boxes, no split screens.\n\nStyle: clean flat vector illustration, geometric shapes, soft gradients allowed only in the background, limited modern palette of sky blue, sunset orange and warm white, crisp edges, friendly rounded shapes.\n\nNo text, no letters, no numbers, no symbols, no logos, no writing anywhere, including on signs, books, screens, paper, clothing and flags.",
+   "image_urls": [
+    "{GUIDE_URL}"
+   ],
+   "aspect_ratio": "9:16",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  }
+ },
+ {
+  "index": 5,
+  "endpoint_id": "fal-ai/nano-banana-2/edit",
+  "input": {
+   "prompt": "Draw a NEW picture.\n\nImage 1 is a LAYOUT GUIDE ONLY. Make the main subject the same SIZE and POSITION as the grey shape in Image 1: same height on the canvas, centred horizontally, resting on the same ground line. Do not copy its shape, colours or plain background.\n\nScene: A glowing orange and pink sunset over the sea, the sun low on the horizon. The sun is centred on the horizon.\n\nThe picture is one continuous scene that fills the WHOLE canvas evenly from the top edge to the bottom edge with detail all the way to the edges: no bands, no panels, no faded or blurred strips, no borders, no frames, no empty boxes, no split screens.\n\nStyle: clean flat vector illustration, geometric shapes, soft gradients allowed only in the background, limited modern palette of sky blue, sunset orange and warm white, crisp edges, friendly rounded shapes.\n\nNo text, no letters, no numbers, no symbols, no logos, no writing anywhere, including on signs, books, screens, paper, clothing and flags.",
+   "image_urls": [
+    "{GUIDE_URL}"
+   ],
+   "aspect_ratio": "9:16",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  }
+ },
+ {
+  "index": 6,
+  "endpoint_id": "fal-ai/nano-banana-2/edit",
+  "input": {
+   "prompt": "Draw a NEW picture.\n\nImage 1 is a LAYOUT GUIDE ONLY. Make the main subject the same SIZE and POSITION as the grey shape in Image 1: same height on the canvas, centred horizontally, resting on the same ground line. Do not copy its shape, colours or plain background.\n\nScene: Two friends lying on the grass pointing up at a clear blue sky with a few white clouds. The friends are centred.\n\nThe picture is one continuous scene that fills the WHOLE canvas evenly from the top edge to the bottom edge with detail all the way to the edges: no bands, no panels, no faded or blurred strips, no borders, no frames, no empty boxes, no split screens.\n\nStyle: clean flat vector illustration, geometric shapes, soft gradients allowed only in the background, limited modern palette of sky blue, sunset orange and warm white, crisp edges, friendly rounded shapes.\n\nNo text, no letters, no numbers, no symbols, no logos, no writing anywhere, including on signs, books, screens, paper, clothing and flags.",
+   "image_urls": [
+    "{GUIDE_URL}"
+   ],
+   "aspect_ratio": "9:16",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  }
+ }
+]

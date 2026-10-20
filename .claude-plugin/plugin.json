@@ -1,0 +1,13 @@
+{
+  "name": "script-to-video",
+  "version": "1.0.0",
+  "description": "Turn any script into a finished narrated video (vertical or landscape, still or animated, any style) at a quoted low cost, with pictures, voice, music, effects, captions and ready-to-post social copy.",
+  "author": {
+    "name": "Topnotch1851",
+    "url": "https://github.com/Topnotch1851"
+  },
+  "homepage": "https://github.com/Topnotch1851/script-to-video",
+  "repository": "https://github.com/Topnotch1851/script-to-video",
+  "license": "MIT",
+  "keywords": ["video", "shorts", "reels", "tiktok", "youtube", "animation", "narration", "fal", "content-creation"]
+}

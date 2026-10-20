@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.DS_Store
+_work/
+qc/
+deliver/
+*.mp4
+*.mov
+*.wav
+*.mp3
+dist/
+.ruff_cache/
