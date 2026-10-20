@@ -101,7 +101,7 @@ and a place where Claude can run code (Claude Code, or the Claude app with code 
 
 ### Option B — Claude app (claude.ai on the web, or Claude desktop)
 
-1. Download **`script-to-video-skill.zip`** from the [latest release](https://github.com/Topnotch1851/script-to-video/releases/latest).
+1. Download **[`script-to-video-skill.zip`](https://github.com/Topnotch1851/script-to-video/raw/main/download/script-to-video-skill.zip)** (the skill folder, ready to upload).
 2. In Claude, make sure **code execution** is turned on in your settings (skills need it).
 3. Go to **Customize → Skills**, upload the zip, and switch the skill on.
 4. Add the fal connector: in your connector settings choose **Add custom connector**, use the URL
