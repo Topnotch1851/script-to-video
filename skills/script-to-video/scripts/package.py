@@ -33,7 +33,7 @@ def main():
         src = os.path.join(root, d)
         if os.path.isdir(src) and os.listdir(src):
             shutil.copytree(src, os.path.join(dst, d))
-    for f in ["shotlist.json", "PRODUCTION-LOG.md", "SOCIAL.md", "layout-guide.png"] + A.extra:
+    for f in ["BRIEF.md", "shotlist.json", "PRODUCTION-LOG.md", "SOCIAL.md", "layout-guide.png"] + A.extra:
         p = f if os.path.isabs(f) else os.path.join(root, f)
         if os.path.exists(p):
             shutil.copy2(p, dst)

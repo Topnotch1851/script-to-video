@@ -34,9 +34,10 @@ Show the price difference right here (`plan_costs.py --compare`).
   naming rules; you upload them (attach, or a shared Google Drive folder). Picture cost here: $0.
 - **Your own footage / photos** (real video, product shots, phone clips): no picture cost; they go in as clips or stills.
 
-**6. Presenter?**
-- None (scenes only) · a recurring character (we make a character sheet once, reused forever) ·
-  a real person who appears with their consent (their photo as reference) · the narrator is never seen.
+**6. Who is on screen, and who speaks?** (details in `brief.md`)
+- None (scenes only) · one recurring presenter (a character sheet, made once, reused forever) · a cast of 2–4 characters
+  (one cast sheet) · a real person with consent (their photo as reference) · the narrator is never seen.
+- Speaking: an unseen narrator · one character narrates · dialogue between characters (one voice each).
 
 **7. Voice?**
 - AI narrator (pick a voice; offer a 1-line sample of 2–3 voices for a few cents) · their own recording

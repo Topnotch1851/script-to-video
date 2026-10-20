@@ -30,7 +30,7 @@ def main():
     if abs(dv - S["_total"]) > 0.1 or abs(da - S["_total"]) > 0.1:
         problems.append("length mismatch")
     for b, rec in zip(S["beats"], tl["beats"]):
-        if not b.get("voice"):
+        if not (b.get("voice") or b.get("lines")):
             continue
         if not rec["voice"]:
             problems.append(f"beat {b['id']}: voice file is silent"); continue

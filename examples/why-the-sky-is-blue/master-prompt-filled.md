@@ -22,7 +22,8 @@ Shape:                  vertical
 Style:                  flat vector explainer
 Still or animated:      still
 Pictures:               I'll make them myself — give me a prompt for each
-Presenter:              none
+On screen:              nobody (scenes only)
+Who speaks:             unseen narrator
 Voice:                  AI voice, suggest one · English · normal pace
 Music:                  new music — light, curious, soft synth and pizzicato
 On-screen text:         subtitles

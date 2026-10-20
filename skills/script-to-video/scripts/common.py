@@ -95,11 +95,38 @@ def load_shotlist(path):
         for k in ("picture", "clip", "voice"):
             if b.get(k) and not b[k].startswith("http") and not os.path.isabs(b[k]):
                 b[k] = os.path.join(root, b[k])
+        for ln in b.get("lines") or []:                # dialogue: several voice files per beat
+            if ln.get("file") and not os.path.isabs(ln["file"]):
+                ln["file"] = os.path.join(root, ln["file"])
     S["_total"] = t
     for m in S.get("music", []) or []:
         if not os.path.isabs(m["file"]):
             m["file"] = os.path.join(root, m["file"])
+    # one presenter ("character") is a cast of one
+    if not S.get("cast") and S.get("character"):
+        c = dict(S["character"]); c.setdefault("id", "presenter"); S["cast"] = [c]
+    S.setdefault("cast", [])
+    S.setdefault("locations", [])
     return S
+
+
+def voice_plan(b, gap=0.25):
+    """Where every spoken line of a beat sits: [(file, start_in_beat, onset, end, speaker, text)].
+    A single "voice" file, or "lines" (dialogue). Lines without "at" follow the previous line after `gap` seconds."""
+    items = b.get("lines") or ([{"file": b["voice"], "at": b.get("voice_at", 0.0), "text": b.get("line"),
+                                 "speaker": b.get("speaker")}] if b.get("voice") else [])
+    out, cursor = [], b.get("voice_at", 0.0)
+    for ln in items:
+        if not ln.get("file") or not os.path.exists(ln["file"]):
+            continue
+        x = decode_audio(ln["file"])
+        on, end = speech_bounds(x)
+        if on is None:
+            continue
+        start = ln["at"] if ln.get("at") is not None else max(0.0, cursor - on)
+        out.append((ln["file"], start, start + on, start + end, ln.get("speaker"), ln.get("text")))
+        cursor = start + end + gap
+    return out
 
 
 def run(cmd, **kw):

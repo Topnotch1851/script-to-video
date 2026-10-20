@@ -252,6 +252,9 @@ class Renderer:
             base = cy0 + i * lh - (bb[1] + bb[3]) / 2
             if self.capbox == "pill":
                 d.text((self.W / 2, base), line, font=f, fill=rgb(self.colors["ink"]) + (255,), anchor="ms")
+            elif self.capbox == "tv":           # bold yellow TV-subtitle look, thick black outline
+                d.text((self.W / 2, base), line, font=f, fill=rgb(self.colors.get("tv_caption", "#FFD23F")) + (255,),
+                       anchor="ms", stroke_width=max(3, size // 9), stroke_fill=(0, 0, 0, 255))
             else:
                 d.text((self.W / 2, base), line, font=f, fill=(255, 255, 255, 255), anchor="ms",
                        stroke_width=max(2, size // 14), stroke_fill=(0, 0, 0, 255))

@@ -1,8 +1,16 @@
 # Master prompt — Script to Video
 
-Copy everything inside the box below into a new chat with Claude (with the **script-to-video** skill installed
-and the **fal** connector connected). Paste your script where it says so. Fill in any answers you already know;
-leave the rest blank and you will be asked. Nothing that costs money happens until you type **approved**.
+**You do not need this prompt.** With the skill installed, one line is enough:
+
+```text
+/script-to-video:make-video a 35-second sitcom-style video for business owners about what MCP is
+```
+(or, in the Claude app, just: "Use script-to-video to make me a video about …"). The skill asks the questions, writes the
+script and a full production brief (cast, places, every scene, voices, sound, cost) and waits for your "approved".
+
+Use this prompt when you want to give everything at once — your own script and your answers — so there are fewer
+questions. Copy everything inside the box into a new chat, paste your script (or a topic), fill in what you know and
+leave the rest blank. Nothing that costs money happens until you type **approved**.
 
 ````text
 MAKE MY VIDEO
@@ -24,8 +32,11 @@ Style:                  (e.g. storybook cartoon, stick figure, flat vector, 3D c
                          cinematic real-life, my own footage — or "suggest")
 Still or animated:      (still = free camera moves / animated / mixed)
 Pictures:               (make them here / I'll make them myself — give me a prompt for each / my own photos or footage)
-Presenter:              (none / a recurring character: describe it / a real person with consent)
-Voice:                  (AI voice — name or "suggest" / my own recording / no narration) · language · pace
+Angle & call to action: (e.g. "sitcom gag: clueless dad, smart daughter" · "Comment MCP for the guide")
+On screen:              (nobody / one presenter: describe / a cast of 2–4: names + looks / a real person with consent)
+Locations:              (one main room + cutaways: describe / a new place every scene / abstract)
+Who speaks:             (unseen narrator / one character narrates / dialogue between characters / no voice)
+Voice:                  (AI voice — name or "suggest" / my own recording) · language · pace
 Music:                  (new music — mood / my own track / none)
 On-screen text:         (none / subtitles / key words / teaching words with colour changes)
 Audience & platforms:   (e.g. kids 4–7, Instagram + TikTok + YouTube + Facebook)

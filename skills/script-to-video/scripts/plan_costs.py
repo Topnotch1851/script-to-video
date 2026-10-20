@@ -14,6 +14,7 @@ options
   --chars     narration characters if known (default estimated from --pace)
   --pace      kids (~9 chars/s, slow with pauses) | normal (~14 chars/s)
   --presenter add one character-sheet picture
+  --references N  cast sheet + location pictures to make (each one picture)
   --reserve   share kept for retries (default 0.15)
 """
 import os, sys, json, math, argparse
@@ -22,12 +23,16 @@ P = json.load(open(os.path.join(KIT, "prices.json")))
 
 
 def quote(seconds, fmt="vertical", motion="still", share=0.5, pictures="generate", clips="generate", music="new",
-          tracks=None, voice="ai", beat=None, chars=None, pace="normal", presenter=False, reserve=0.15):
+          tracks=None, voice="ai", beat=None, chars=None, pace="normal", presenter=False, reserve=0.15, references=0):
     beat = beat or (5.0 if fmt in ("vertical", "square") else 6.0)
     n = math.ceil(seconds / beat)
     rows = []
     if pictures == "generate":
-        rows.append(("Pictures", f"{n + (1 if presenter else 0)} x ${P['picture']['price']:.2f}", (n + (1 if presenter else 0)) * P["picture"]["price"]))
+        rows.append(("Pictures", f"{n} x ${P['picture']['price']:.2f}", n * P["picture"]["price"]))
+        refs = references + (1 if presenter else 0)
+        if refs:
+            rows.append(("Reference pictures (cast sheet, locations)", f"{refs} x ${P['picture']['price']:.2f}",
+                         refs * P["picture"]["price"]))
     else:
         rows.append(("Pictures", f"{n} made by you elsewhere", 0.0))
     if motion in ("animated", "mixed") and clips == "generate":
@@ -72,11 +77,12 @@ def main():
     ap.add_argument("--chars", type=int)
     ap.add_argument("--pace", default="normal", choices=["kids", "normal"])
     ap.add_argument("--presenter", action="store_true")
+    ap.add_argument("--references", type=int, default=0, help="cast sheet + location pictures to make")
     ap.add_argument("--reserve", type=float, default=0.15)
     ap.add_argument("--compare", action="store_true")
     A = ap.parse_args()
     kw = dict(fmt=A.format, share=A.animated_share, clips=A.clips, music=A.music, tracks=A.tracks, voice=A.voice,
-              beat=A.beat, chars=A.chars, pace=A.pace, presenter=A.presenter, reserve=A.reserve)
+              beat=A.beat, chars=A.chars, pace=A.pace, presenter=A.presenter, reserve=A.reserve, references=A.references)
     mins = A.seconds / 60
     if A.compare:
         print(f"### Options for a {A.seconds:.0f}-second {A.format} video\n")

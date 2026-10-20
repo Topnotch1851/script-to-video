@@ -8,7 +8,7 @@ usage: fit_beats.py SHOTLIST.json [--min 5] [--max 12] [--tail 0.6] [--step 0.5]
 """
 import os, sys, json, math, argparse
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import load_shotlist, decode_audio, speech_bounds
+from common import load_shotlist, voice_plan
 
 
 def main():
@@ -21,14 +21,15 @@ def main():
     raw = json.load(open(A.shotlist))
     total = 0.0
     for b, r in zip(S["beats"], raw["beats"]):
-        if b.get("voice") and os.path.exists(b["voice"]):
-            on, end = speech_bounds(decode_audio(b["voice"]))
-            if end is None:
-                print(f"beat {b['id']}: voice is silent"); total += b["seconds"]; continue
-            need = b["voice_at"] + end + max(A.tail, b.get("answer_gap", 0))
+        if b.get("voice") or b.get("lines"):
+            plan = voice_plan(b)                       # one narrator, or several dialogue lines in turn
+            if not plan:
+                print(f"beat {b['id']}: no voice audio found"); total += b["seconds"]; continue
+            end = plan[-1][3]
+            need = end + max(A.tail, b.get("answer_gap", 0))
             sec = max(A.min, math.ceil(need / A.step) * A.step)
             flag = "  <-- long line: split it across two pictures" if sec > A.max else ""
-            print(f"beat {b['id']:3d}: speech ends {end:.2f}s -> {sec:.1f}s{flag}")
+            print(f"beat {b['id']:3d}: speech ends {end:.2f}s ({len(plan)} line(s)) -> {sec:.1f}s{flag}")
             r["seconds"] = sec
         total += r.get("seconds", b["seconds"])
     print(f"total {total:.1f}s ({total / 60:.1f} min), {len(S['beats'])} beats")

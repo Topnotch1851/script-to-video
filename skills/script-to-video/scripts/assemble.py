@@ -16,7 +16,7 @@ usage: assemble.py SHOTLIST.json OUT.mp4 [--preview] [--jobs 3] [--reuse]
 import sys, os, json, argparse, subprocess, concurrent.futures as cf
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import load_shotlist, decode_audio, write_wav, speech_bounds, rms_db, has_audio, SR, FFMPEG
+from common import load_shotlist, decode_audio, write_wav, speech_bounds, rms_db, has_audio, SR, FFMPEG, voice_plan
 import build_beat, sfx as SFX
 
 
@@ -109,17 +109,18 @@ def main():
     voice, amb, fx = (np.zeros((n, 2), np.float32) for _ in range(3))
     timeline = []
     for b in S["beats"]:
-        rec = {"id": b["id"], "start": b["_start"], "seconds": b["seconds"], "voice": None}
-        if b.get("voice"):
-            v = decode_audio(b["voice"])
-            on, end = speech_bounds(v)
-            room = b["seconds"] - b["voice_at"]
+        rec = {"id": b["id"], "start": b["_start"], "seconds": b["seconds"], "voice": None, "lines": []}
+        plan = voice_plan(b)                      # one narrator file, or several dialogue lines in turn
+        for f, start, on, end, speaker, text in plan:
+            v = decode_audio(f)
+            room = b["seconds"] - start
             if len(v) > room * SR:
-                print(f"WARNING beat {b['id']}: voice is {len(v)/SR:.2f}s but only {room:.2f}s fits; it will be cut")
+                print(f"WARNING beat {b['id']}: a line runs past the end of the beat ({start + len(v)/SR:.2f}s > {b['seconds']:.2f}s); it will be cut")
                 v = v[:int(room * SR)]
-            place(voice, v, b["_start"] + b["voice_at"])
-            if on is not None:
-                rec["voice"] = [round(b["voice_at"] + on, 3), round(b["voice_at"] + end, 3)]
+            place(voice, v, b["_start"] + start)
+            rec["lines"].append({"speaker": speaker, "text": text, "on": round(on, 3), "end": round(end, 3)})
+        if plan:
+            rec["voice"] = [round(plan[0][2], 3), round(plan[-1][3], 3)]
         # clip_audio: "ambience" (default: levelled to ambience_db under everything), "full" (own footage with
         # real sound/dialogue, kept at its own level and treated like voice for ducking), "off"
         mode = b.get("clip_audio", "ambience")
@@ -161,11 +162,18 @@ def main():
                     "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", "-t", f"{total:.3f}", A.out], check=True)
 
     # 4. captions + timeline
-    srt, k = [], 1
+    srt = []
+    names = {c.get("id"): c.get("name", c.get("id")) for c in S.get("cast", [])}
+    multi = len({ln["speaker"] for r in timeline for ln in r["lines"] if ln["speaker"]}) > 1
     for b, rec in zip(S["beats"], timeline):
-        if b.get("line") and rec["voice"]:
-            a, z = rec["voice"]
-            srt.append(f"{k}\n{srt_time(b['_start'] + a)} --> {srt_time(b['_start'] + z + 0.3)}\n{b['line']}\n"); k += 1
+        for ln in rec["lines"]:
+            if not ln["text"]:
+                continue
+            who = f"{names.get(ln['speaker'], ln['speaker'])}: " if multi and ln["speaker"] else ""
+            srt.append([b['_start'] + ln['on'], b['_start'] + ln['end'] + 0.3, f"{who}{ln['text']}"])
+    for a, z in zip(srt, srt[1:]):            # never let a subtitle overlap the next one
+        a[1] = min(a[1], z[0] - 0.02)
+    srt = [f"{i}\n{srt_time(a)} --> {srt_time(z)}\n{t}\n" for i, (a, z, t) in enumerate(srt, 1)]
     base = os.path.splitext(A.out)[0]
     if srt:
         open(base + ".srt", "w").write("\n".join(srt))

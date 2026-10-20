@@ -7,11 +7,15 @@ Two routes. Both end the same way: numbered files in `pictures/` (`01.png`, `02.
 1. **Layout guide** (free): `python3 KIT/scripts/layout_guide.py --format vertical --subject person --out layout-guide.png`
    (`object` for a product or thing, `group` for several people). Upload it once with the fal upload tools
    (`upload_file`, or prepare upload → PUT → verify) and keep the URL as `GUIDE_URL`.
-2. **Character sheet** (only with a presenter, only if none exists, $0.08): `fal-ai/nano-banana-2`, aspect of the format,
-   resolution 1K, prompt from `prompts/PICTURE-PROMPTS.md` ("Step 0"). Check: four poses, same character, nothing written.
-   Save its URL as `SHEET_URL` in the production log (and the series bible). It is reused for every future video.
+2. **Reference pictures** (`prompts/fal-references.json`, $0.08 each, made once and reused for every future video):
+   - **Cast/character sheet**: one presenter → four poses; a cast of 2–4 → everyone side by side, front and three-quarter
+     views, plus a row of expressions (2K, wide). Check: same characters as described, nothing written.
+   - **Location plates**: one establishing picture per main location, with no characters in it.
+   Save the URLs in the shot list (`cast_sheet`, `locations[].plate`), the production log and the series bible.
 3. **Prompts**: `python3 KIT/scripts/prompt_pack.py shotlist.json` writes `prompts/fal-pictures.json`.
-   Replace `{SHEET_URL}` and `{GUIDE_URL}`. Validate one input against `get_model_schema` first.
+   Replace `{CAST_URL}`, `{PLATE_URL_<id>}` and `{GUIDE_URL}` with the uploaded URLs. Each scene gets the right references
+   automatically: the cast sheet when characters appear, its location plate (or the layout guide when there is none).
+   Validate one input against `get_model_schema` first.
 4. **Pilot**: submit the hardest beat alone (crouching, two subjects, a big object, close-up). Show it. Wait for approval.
 5. **Batch**: `check_account_status`, then one `submit_jobs` call for the rest; `wait_for_jobs`.
 6. **Download** every result into `pictures/NN.png`. Log request ids and costs.

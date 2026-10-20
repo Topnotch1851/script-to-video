@@ -10,8 +10,9 @@ Everything here was learned in real production; follow it exactly unless the per
 
 ## The promise (say this in your own words at the start)
 
-- They paste a script (or a topic and you write the script with them).
-- You ask a few questions, then show **the full cost before anything is paid for**.
+- They give you a script, a topic, a description, an old production prompt, or "another one like X". Nothing else is needed.
+- You ask a few questions, then write a full **production brief** (cast, places, every scene, voices, sound, cost)
+  and show **the full cost before anything is paid for**.
 - Nothing that costs money happens without the word **"approved"**.
 - They get a finished video, captions file, thumbnail and ready-to-paste posts for every platform.
 
@@ -19,7 +20,8 @@ Everything here was learned in real production; follow it exactly unless the per
 
 | Path | What it is |
 |---|---|
-| `references/intake.md` | The questions to ask, their options, and how to suggest defaults. **Read first.** |
+| `references/brief.md` | How you design the video: four ways in, creative questions, writing the script, the brief. **Read first.** |
+| `references/intake.md` | The production questions (length, shape, still/animated, pictures, voice, music, text) and defaults |
 | `references/styles.md` | Video style menu with the exact style text to put in every picture prompt |
 | `references/formats.md` | Screen sizes, safe zones, beat lengths, text modes |
 | `references/costs.md` | How to quote, live price checks, spending caps |
@@ -32,7 +34,7 @@ Everything here was learned in real production; follow it exactly unless the per
 | `references/lessons.md` | Failure modes we already paid for, and their fixes |
 | `references/series.md` | Running a series: memory, continuity, never repeating lines |
 | `scripts/*.py` | Free local tools (run with `python3`; need ffmpeg, Pillow, numpy) |
-| `templates/` | PRODUCTION-LOG, SOCIAL and SERIES-BIBLE templates |
+| `templates/` | BRIEF, MASTER-PROMPT, PRODUCTION-LOG, SOCIAL and SERIES-BIBLE templates |
 | `prices.json` | Last checked unit prices (re-check live before quoting) |
 | `fonts/` | Open-licence fonts (Andika, Patrick Hand, Poppins) |
 
@@ -55,37 +57,43 @@ Keep a task list. Report spend against the quote at every gate. Show assets inli
 give your own honest one-line read on each, then ask one question and wait.
 
 ### Step 0 — Read what they gave you (free)
+`references/brief.md` → "Four ways in":
 - A **script**: keep their words. You may only suggest edits.
-- A **production prompt** (theirs or from elsewhere): run `references/prompt-fixer.md` first and show what you changed.
-- A **topic only**: draft a script with them first (hook in the first 2 seconds, one idea per beat, clear ending).
+- A **topic, idea or description** only: you are the writer. Ask the creative questions, then write the script.
+- A **production prompt** (theirs, old, or someone else's): run `references/prompt-fixer.md` and show what you changed.
+- **"Another one like X"**: reuse that brief or series bible's locks; change only the topic (`references/series.md`).
 
-### Step 1 — Intake questions (free)
-Ask the questions in `references/intake.md`: length, shape, style, still/animated, who makes the pictures,
-presenter, voice, music, on-screen text, audience. Suggest a default for each from the script so they can say "yes".
-Never assume on-screen text: it depends on the style and purpose.
+### Step 1 — Questions (free)
+Ask only what the request leaves open, with a suggested answer for each so they can say "yes to all":
+the creative questions in `brief.md` (audience, angle, who is on screen, who speaks — narrator or dialogue —,
+where, style, call to action), then the production questions in `intake.md` (length, shape, still/animated,
+who makes the pictures, voice, music, on-screen text, platforms, budget). Never assume on-screen text.
 
-### Step 2 — Plan and quote (free) → GATE 1
+### Step 2 — The brief and the quote (free) → GATE 1
 1. `python3 KIT/scripts/new_project.py <folder> --title ... --format ... --seconds ... --motion ... --subject ...`
-2. Split the script into beats (one picture each) and fill `shotlist.json` (`references/shotlist.md`):
-   narration line, scene, subject action, motion (if animated), on-screen text plan (if any), caption.
+2. Write `BRIEF.md` from `templates/BRIEF-template.md` and fill `shotlist.json` to match (`references/shotlist.md`):
+   cast, locations, and per scene the picture, action (loop or free), lines (narrator or speaker-tagged dialogue),
+   on-screen text and sound.
 3. Check live prices with `get_pricing` for the endpoints in `prices.json`; update the file if they changed.
-4. `python3 KIT/scripts/plan_costs.py --seconds N --format F --motion M --pictures P --music X [--pace kids]`
-   and `--compare` for the side-by-side grid.
-5. Show: the beat table, the style, the text plan, the quote with the **spending cap** (= total + reserve).
-   Ask: **"Approve the plan and the budget?"** Wait for "approved".
+4. `python3 KIT/scripts/plan_costs.py --seconds N --format F --motion M --pictures P --music X --references R`
+   (R = cast sheet + location pictures to make) and `--compare` for the side-by-side grid.
+5. Show the brief (scene table first), the quote and the **spending cap** (= total + reserve).
+   Ask: **"Approve the brief and the budget?"** Wait for "approved". Send `BRIEF.md` as a file they can keep and reuse.
 
 ### Step 3 — Look pilot → GATE 2
-- **Pictures made here:** make the character sheet first if there is a presenter and none exists
-  (`references/pictures.md`), upload the layout guide (`layout_guide.py`), then make ONE pilot picture of the hardest beat.
-  If animated, also make ONE pilot clip from it. Check them (`check_pictures.py`) and show them.
+- **Pictures made here:** run `prompt_pack.py`; make the reference pictures first (`prompts/fal-references.json`:
+  the cast/character sheet if none exists, one picture per main location) and upload the layout guide if a scene
+  needs it (`references/pictures.md`). Then make ONE pilot picture of the hardest scene. If animated, also ONE pilot
+  clip from it. Check them (`check_pictures.py`) and show them.
 - **Pictures made by the person:** `python3 KIT/scripts/prompt_pack.py shotlist.json` → send them
   `prompts/PICTURE-PROMPTS.md` and `layout-guide.png`; wait for the pictures (attachments or a shared Drive folder);
   download them into `pictures/` named `01.png`…; run `check_pictures.py`; show the contact sheet.
 - Ask: **"Approve the look?"** Wait.
 
 ### Step 4 — Voice, pictures, free preview → GATE 3
-1. Narration for all lines (cheap, do it first). Measure: `fit_beats.py` (long videos) or check every line ends inside
-   its beat (`references/sound.md`). Retake a line only when wrong; log every take.
+1. Voices for all lines (cheap, do it first) from `prompts/fal-voice.json` (one job per narrator line or dialogue line,
+   each with its speaker's voice). Then `fit_beats.py` sets every scene's length from its lines (dialogue lines are
+   placed one after another automatically). Retake a line only when wrong; log every take.
 2. The remaining pictures in one `submit_jobs` batch (made-here route). Check each. One automatic retry for a failed
    picture with the fault named in the prompt (max 3 per video); anything else needs approval.
 3. Free preview: `python3 KIT/scripts/assemble.py shotlist.json preview.mp4 --preview` (stills with camera moves,
@@ -93,7 +101,8 @@ Never assume on-screen text: it depends on the style and purpose.
 4. Show the preview + contact sheet. Ask: **"Approve words, timing and pictures?"** Wait.
 
 ### Step 5 — Animation and music → GATE 4
-- Animated or mixed: submit the remaining clips in one batch (`references/animation.md`), review each as a strip of
+- Animated or mixed: submit the remaining clips in one batch from `prompts/fal-clips.json` (`references/animation.md`:
+  *loop* scenes use the same picture as first and last frame; *free* acting scenes do not), review each as a strip of
   frames. Never regenerate a clip without approval; at most two takes per clip.
 - Music: one track per ~2 minutes (`references/sound.md`) unless they bring their own or chose none.
 - Final: `assemble.py shotlist.json final.mp4` then `qc.py shotlist.json final.mp4` (must print PASS).

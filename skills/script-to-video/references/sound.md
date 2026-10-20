@@ -21,6 +21,15 @@
 - Long videos: `python3 KIT/scripts/fit_beats.py shotlist.json` sets every beat's length from its line.
 - A line that runs long is retaken shorter or split; never squeezed or sped up.
 
+## Several voices (dialogue, or a character who narrates)
+- Each cast member gets a voice name in the cast list (pick voices that sound clearly different: age, pitch, accent).
+  Offer a one-line sample of each before the batch.
+- Each spoken line is its own file (`prompts/fal-voice.json` has one job per line with the right voice).
+- Lines in a scene are placed one after another with a 0.25 s gap (or at a set `"at"` time); `fit_beats.py` lengthens
+  the scene to fit. Keep dialogue scenes to 2–3 short lines.
+- It is voice-over: characters act in the pictures and clips, but mouths are not lip-synced. Write scenes so that works
+  (reactions, gestures, the speaker turned toward the other character).
+
 ## Voice (their own recording)
 One file per beat in `voice/`, or one long file split at the pauses:
 `python3 KIT/scripts/split_voice.py recording.wav --beats N --out voice/`. Quiet rooms, phone close to the mouth.

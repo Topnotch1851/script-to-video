@@ -24,6 +24,11 @@ rule here; then say so and offer the fix.
 | A delivery path on someone's computer | a zip sent in the chat (plus the folder if their computer is connected) |
 | Only one platform's caption | `SOCIAL.md` for every platform they post on (`handoff.md`) |
 | Clips regenerated automatically | never without approval; max two takes |
+| Captions or labels drawn inside the pictures ("caption rendered exactly", "labelled CALENDAR") | captions added at assembly (`caption_box: "tv"` for the yellow subtitle look); labels become icons or objects, or on-screen text at assembly |
+| Reference sheets "labelled in small letters" | no labels on sheets (the model copies them into scenes) |
+| Cast + room plate + cutaway structure | keep it: `cast`, `locations` with plates, cutaways described per scene |
+| Long action clips (10 s) with several gags | keep them as free clips (`"loop": false`, `clip_seconds`) |
+| Fixed narration timing per clip | voices first, then `fit_beats.py` sets scene lengths |
 
 ## Output format
 1. **What I changed** — 5–12 bullets, plain words.

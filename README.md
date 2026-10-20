@@ -14,8 +14,15 @@ documentaries, real-looking people or your own footage.
 
 ## What you get
 
+- **Start with anything** — a finished script, just a topic ("a 30-second video about agent rooms"), a description,
+  an old production prompt, or "another one like the last episode". The skill asks only what is missing.
+- **It designs the video for you** — from a topic it writes the script and a full **production brief**: the angle and
+  hook, a cast of characters (one presenter or 2–4 characters), the locations, every scene (picture, action, lines,
+  caption), voices, music, cost and the approval steps. You can keep the brief and reuse it for the next video.
+- **One voice or a conversation** — an unseen narrator, a character who narrates, or **dialogue** between characters,
+  each with their own voice (voice-over; mouths are not lip-synced).
 - **A guided intake** — length, vertical or landscape (suggested from length), video style, still or animated,
-  who makes the pictures, presenter, voice, music and on-screen text (or none). It suggests an answer for each.
+  who makes the pictures, voice, music and on-screen text (or none). It suggests an answer for each.
 - **The full price before anything is paid for**, with a spending cap. Nothing that costs money runs until you type **approved**.
 - **Two picture routes**
   - *Made for you* on fal.ai (about $0.08 a picture), framed with a layout guide so the subject always sits right.
@@ -58,8 +65,8 @@ A real 60-second animated episode made with this workflow cost **$2.36** in tota
 
 ```mermaid
 flowchart LR
-  A[Paste script] --> B[Questions<br/>length · shape · style<br/>still/animated · pictures<br/>voice · music · text]
-  B --> C[Plan + price<br/>+ spending cap]
+  A[Script, topic,<br/>old prompt or<br/>'another like X'] --> B[Questions<br/>cast · places · who speaks<br/>length · shape · style<br/>still/animated · pictures<br/>music · text]
+  B --> C[Production brief<br/>+ price + spending cap]
   C -->|approved| D[Look pilot<br/>1 picture / clip<br/>or your prompt pack]
   D -->|approved| E[Voice + all pictures<br/>+ free preview]
   E -->|approved| F[Animation + music<br/>+ final checks]
@@ -120,11 +127,17 @@ master prompt. The tools are plain Python and ffmpeg, so anything that can run t
 ## Make your first video (step by step)
 
 1. **Open a new chat** (Claude app) or start `claude` in an empty folder (Claude Code).
-2. **Paste the master prompt** from [`MASTER-PROMPT.md`](MASTER-PROMPT.md) and put your script in the script box.
-   In Claude Code you can also type `/script-to-video:make-video` and paste your script after it.
-3. **Answer the questions** you left blank. Each comes with a suggestion; "yes to all" is fine.
-4. **Read the plan and the price.** You see every beat (one picture each), the narration line, what is on screen,
-   the cost and the spending cap. Type **approved** to start, or ask for changes.
+2. **Say what you want.** One line is enough:
+   ```text
+   /script-to-video:make-video a 35-second sitcom-style video for small business owners about password managers
+   ```
+   In the Claude app: *"Use script-to-video to make me a video about …"*. Have a script already? Paste it after the
+   command, or use the fuller [`MASTER-PROMPT.md`](MASTER-PROMPT.md) to give your script and all your answers at once.
+3. **Answer the questions.** Only what your request left open: who is on screen, who speaks, where it happens, style,
+   length, still or animated, who makes the pictures, music, on-screen text. Each comes with a suggestion; "yes to all" is fine.
+4. **Read the production brief and the price.** You see the cast, the places and every scene (picture, action, lines,
+   caption), the cost and the spending cap. Type **approved** to start, or ask for changes. Keep `BRIEF.md`: hand it
+   back any time to make another video like it.
 5. **Approve the look.** You see one pilot picture (and one clip if animated).
    *Making your own pictures?* You get `PICTURE-PROMPTS.md` instead: make the pictures in any tool,
    name them `01.png`, `02.png` …, and attach them or share a Google Drive folder link.
@@ -134,14 +147,24 @@ master prompt. The tools are plain Python and ffmpeg, so anything that can run t
 8. **Download your package**: the video, captions file, thumbnails, SOCIAL.md with posts for each platform,
    the production log with every cost, and one zip with everything.
 
-A complete worked example (script, filled-in master prompt, shot list and generated picture prompts) is in
-[`examples/why-the-sky-is-blue`](examples/why-the-sky-is-blue).
+Worked examples:
+- [`examples/topic-only-sitcom`](examples/topic-only-sitcom) — a one-line topic turned into a three-character sitcom
+  video with dialogue: the brief the skill wrote, the shot list and every generated prompt. Quote: $1.27 for 35 s animated.
+- [`examples/why-the-sky-is-blue`](examples/why-the-sky-is-blue) — a finished script, still pictures you make yourself,
+  subtitles. Quote: $0.12 for 30 s.
 
 ## Already have a production prompt?
 
 Paste it into the script box. The skill **corrects it first** — wrong models or prices, fixed budgets, text drawn by
 the AI, "leave the top empty" framing, missing music or captions, repeated lines in a series — and shows you a short
 list of what it changed before anything runs.
+
+## Casts, locations and dialogue
+
+For videos with several characters the skill makes one **cast sheet** (everyone side by side, with expressions) and one
+**reference picture per main location**, then sends the right ones with every scene so faces and rooms stay the same.
+Cutaways are described in the scene. Each character gets a voice; lines in a scene play one after another and the scene
+length is fitted to them. Acting scenes use free animation (a whole gag in one clip, up to 15 s); presenter scenes loop.
 
 ## Making a series
 
@@ -161,7 +184,7 @@ Everything local lives in `skills/script-to-video/scripts/` and reads one file, 
 |---|---|
 | `new_project.py` | Create a project folder, starter shot list and layout guide |
 | `plan_costs.py` | Price quote; `--compare` prints every option side by side |
-| `prompt_pack.py` | Picture prompts, animation prompts and fal job lists from the shot list |
+| `prompt_pack.py` | Picture, animation and voice prompts, reference-picture prompts (cast sheet, locations) and fal job lists |
 | `layout_guide.py` | The framing reference image for any format |
 | `check_pictures.py` | Checks pictures (shape, size, bands, empty strips) + contact sheet |
 | `fit_beats.py` | Times every beat to its narration (long videos) |

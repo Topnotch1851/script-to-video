@@ -1,0 +1,79 @@
+[
+ {
+  "beat": 1,
+  "file": "voice/01-1.mp3",
+  "speaker": "rita",
+  "input": {
+   "text": "I use the same password everywhere. It's my cat's name.",
+   "voice": "Sarah",
+   "stability": 0.5
+  },
+  "endpoint_id": "fal-ai/elevenlabs/tts/eleven-v3"
+ },
+ {
+  "beat": 1,
+  "file": "voice/01-2.mp3",
+  "speaker": "max",
+  "input": {
+   "text": "Mum. Everyone knows your cat's name.",
+   "voice": "Lily",
+   "stability": 0.5
+  },
+  "endpoint_id": "fal-ai/elevenlabs/tts/eleven-v3"
+ },
+ {
+  "beat": 2,
+  "file": "voice/02-1.mp3",
+  "speaker": "max",
+  "input": {
+   "text": "If one site leaks it, every door opens. Email, bank, the bakery's orders.",
+   "voice": "Lily",
+   "stability": 0.5
+  },
+  "endpoint_id": "fal-ai/elevenlabs/tts/eleven-v3"
+ },
+ {
+  "beat": 3,
+  "file": "voice/03-1.mp3",
+  "speaker": "max",
+  "input": {
+   "text": "A password manager makes a different strong key for every lock, and keeps them all safe.",
+   "voice": "Lily",
+   "stability": 0.5
+  },
+  "endpoint_id": "fal-ai/elevenlabs/tts/eleven-v3"
+ },
+ {
+  "beat": 4,
+  "file": "voice/04-1.mp3",
+  "speaker": "max",
+  "input": {
+   "text": "You remember one strong password. It remembers the rest.",
+   "voice": "Lily",
+   "stability": 0.5
+  },
+  "endpoint_id": "fal-ai/elevenlabs/tts/eleven-v3"
+ },
+ {
+  "beat": 4,
+  "file": "voice/04-2.mp3",
+  "speaker": "rita",
+  "input": {
+   "text": "One password? I can do one!",
+   "voice": "Sarah",
+   "stability": 0.5
+  },
+  "endpoint_id": "fal-ai/elevenlabs/tts/eleven-v3"
+ },
+ {
+  "beat": 5,
+  "file": "voice/05-1.mp3",
+  "speaker": "max",
+  "input": {
+   "text": "Set one up today. Comment KEYS and we'll send the beginner's checklist.",
+   "voice": "Lily",
+   "stability": 0.5
+  },
+  "endpoint_id": "fal-ai/elevenlabs/tts/eleven-v3"
+ }
+]

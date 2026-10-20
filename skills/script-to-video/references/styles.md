@@ -17,7 +17,8 @@ in every picture prompt so all pictures match. Text is never drawn by the model,
 | 10 | Pixel art | gaming, retro, tech | detailed 16-bit pixel art, limited palette, crisp pixels, no blur, retro game look |
 | 11 | Cinematic real-life | documentaries, true stories, travel, real-people scenes | photorealistic cinematic photograph, natural light, shallow depth of field, realistic skin and materials, 35mm film look, true-to-life colours |
 | 12 | Stock-photo clean | business, health, finance | bright clean professional photograph, soft daylight, neutral background, realistic people and objects, natural colours |
-| 13 | Your own footage/photos | vlogs, products, real events | (no lock; their media is used as-is, cropped to the shape) |
+| 13 | Sitcom animation | comedy explainers, family gags, adults | flat cel-shaded TV sitcom animation, rounded soft characters with oversized heads, big oval eyes with small dot pupils, thick even black outlines, flat colours with almost no shading, clean flat pastel backgrounds, simple furniture, even sitcom lighting, wide level camera, original characters only |
+| 14 | Your own footage/photos | vlogs, products, real events | (no lock; their media is used as-is, cropped to the shape) |
 
 For styles 11–12 set `"look": "photo"` in the shot list so prompts say "photograph" instead of "picture".
 

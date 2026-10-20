@@ -5,14 +5,17 @@
 ## How to make them
 
 1. Use any image tool you like (free or paid). Set the shape to **9:16** before you start.
-2. If your tool accepts reference images, attach the **layout guide** (`layout-guide.png`) to every picture; it keeps the framing right. If it does not, ignore the line about the layout guide in each prompt.
-3. Paste one prompt per picture. Make one picture per prompt. Re-roll any picture that has writing in it or a band or empty strip across it.
-4. Save as PNG or JPG named by beat number: `01.png`, `02.png`, `03.png` ...
-5. Put them all in one folder. Then either attach them in the chat, or upload the folder to Google Drive, share it as *Anyone with the link can view*, and paste the link in the chat.
+2. Make the Step 0 reference pictures first (if any). Keep them; they are reused for every scene and every future video.
+3. If your tool accepts reference images, attach the **layout guide** (`layout-guide.png`) when a scene has no location picture, in that order, to each picture. If it does not, the prompts still describe everything; ignore the lines that mention Image 1/Image 2.
+4. Paste one prompt per picture. Re-roll any picture that has writing in it, a band or empty strip across it, or a character who looks different from the sheet.
+5. Save as PNG or JPG named by beat number: `01.png`, `02.png`, `03.png` ...
+6. Put them all in one folder. Then attach them in the chat, or upload the folder to Google Drive, share it as *Anyone with the link can view*, and paste the link in the chat.
 
 ## Pictures
 
 ### 01.png — Ever wondered why the sky is blue and not green or pink?
+
+Attach: layout-guide.png
 
 ```
 Draw a NEW picture.
@@ -30,6 +33,8 @@ No text, no letters, no numbers, no symbols, no logos, no writing anywhere, incl
 
 ### 02.png — Sunlight looks white, but it is really every colour mixed together.
 
+Attach: layout-guide.png
+
 ```
 Draw a NEW picture.
 
@@ -45,6 +50,8 @@ No text, no letters, no numbers, no symbols, no logos, no writing anywhere, incl
 ```
 
 ### 03.png — When it hits the air, tiny bits of air bounce the colours around.
+
+Attach: layout-guide.png
 
 ```
 Draw a NEW picture.
@@ -62,6 +69,8 @@ No text, no letters, no numbers, no symbols, no logos, no writing anywhere, incl
 
 ### 04.png — Blue light is bounced the most, so blue reaches your eyes from every direction.
 
+Attach: layout-guide.png
+
 ```
 Draw a NEW picture.
 
@@ -78,6 +87,8 @@ No text, no letters, no numbers, no symbols, no logos, no writing anywhere, incl
 
 ### 05.png — At sunset, light travels through much more air, so the reds and oranges win.
 
+Attach: layout-guide.png
+
 ```
 Draw a NEW picture.
 
@@ -93,6 +104,8 @@ No text, no letters, no numbers, no symbols, no logos, no writing anywhere, incl
 ```
 
 ### 06.png — Now you know. Look up, and tell someone why!
+
+Attach: layout-guide.png
 
 ```
 Draw a NEW picture.

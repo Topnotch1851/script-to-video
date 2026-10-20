@@ -1,0 +1,68 @@
+[
+ {
+  "beat": 1,
+  "file": "voice/01.mp3",
+  "speaker": null,
+  "input": {
+   "text": "Ever wondered why the sky is blue and not green or pink?",
+   "voice": "Rachel",
+   "stability": 0.5
+  },
+  "endpoint_id": "fal-ai/elevenlabs/tts/eleven-v3"
+ },
+ {
+  "beat": 2,
+  "file": "voice/02.mp3",
+  "speaker": null,
+  "input": {
+   "text": "Sunlight looks white, but it is really every colour mixed together.",
+   "voice": "Rachel",
+   "stability": 0.5
+  },
+  "endpoint_id": "fal-ai/elevenlabs/tts/eleven-v3"
+ },
+ {
+  "beat": 3,
+  "file": "voice/03.mp3",
+  "speaker": null,
+  "input": {
+   "text": "When it hits the air, tiny bits of air bounce the colours around.",
+   "voice": "Rachel",
+   "stability": 0.5
+  },
+  "endpoint_id": "fal-ai/elevenlabs/tts/eleven-v3"
+ },
+ {
+  "beat": 4,
+  "file": "voice/04.mp3",
+  "speaker": null,
+  "input": {
+   "text": "Blue light is bounced the most, so blue reaches your eyes from every direction.",
+   "voice": "Rachel",
+   "stability": 0.5
+  },
+  "endpoint_id": "fal-ai/elevenlabs/tts/eleven-v3"
+ },
+ {
+  "beat": 5,
+  "file": "voice/05.mp3",
+  "speaker": null,
+  "input": {
+   "text": "At sunset, light travels through much more air, so the reds and oranges win.",
+   "voice": "Rachel",
+   "stability": 0.5
+  },
+  "endpoint_id": "fal-ai/elevenlabs/tts/eleven-v3"
+ },
+ {
+  "beat": 6,
+  "file": "voice/06.mp3",
+  "speaker": null,
+  "input": {
+   "text": "Now you know. Look up, and tell someone why!",
+   "voice": "Rachel",
+   "stability": 0.5
+  },
+  "endpoint_id": "fal-ai/elevenlabs/tts/eleven-v3"
+ }
+]

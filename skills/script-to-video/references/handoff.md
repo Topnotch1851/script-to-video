@@ -6,7 +6,7 @@
 - `thumbnails/` — `thumbnail.py`: `youtube` 1280x720 for landscape; `vertical` cover for Shorts/Reels
 - `SOCIAL.md` — ready-to-paste posts (below)
 - `PRODUCTION-LOG.md` — every paid call (endpoint, request id, cost, verdict), totals vs quote, what to fix next time
-- `shotlist.json`, `prompts/`, `pictures/`, `clips/`, `voice/`, `music/`, `layout-guide.png` (so anything can be rebuilt)
+- `BRIEF.md` (the production brief, reusable for the next video), `shotlist.json`, `prompts/`, `pictures/`, `clips/`, `voice/`, `music/`, `layout-guide.png` (so anything can be rebuilt)
 Send the zip and the video with the file-sending tool. Never paste huge file contents in the chat.
 
 ## SOCIAL.md — always, for every platform they use

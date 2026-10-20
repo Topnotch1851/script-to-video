@@ -56,6 +56,41 @@
 ```
 (Comments are for reading only; the real file is plain JSON.)
 
+## Several characters, locations and dialogue
+```json
+"voice": "Rachel",                       // default narrator voice
+"motion_style": "loop",                  // loop (default) | free — per beat with "loop": true/false
+"cast": [
+  {"id": "doug", "name": "Doug", "description": "a round-bellied dad in a green polo shirt…", "keep": "face, body, hair",
+   "outfit": null, "voice": "Roger"},
+  {"id": "ellie", "name": "Ellie", "description": "a sharp 9-year-old in a white lab coat and round red glasses…", "voice": "Lily"},
+  {"id": "byte", "name": "Byte", "description": "a pin-shaped smart speaker with a glowing ring face…", "always": false}
+],
+"cast_sheet": "https://…/cast-sheet.png",        // once made (one sheet with everyone)
+"locations": [
+  {"id": "room", "name": "living room", "description": "a green couch facing the camera, a big TV on the left…",
+   "plate": "https://…/room.png"},               // true = make a reference picture; false = describe only (cutaways)
+  {"id": "hotel", "name": "hotel room", "description": "a small beige hotel room…", "plate": false}
+],
+"beats": [
+  {"id": 1, "seconds": 8, "location": "room", "cast": ["doug", "ellie", "byte"],
+   "scene": "Doug sprawled on the couch pointing the remote at Byte", "action": "Ellie peeks over the couch",
+   "motion": "Doug jabs the remote three times, Byte shrugs, Ellie raises an eyebrow", "loop": false, "clip_seconds": 8,
+   "lines": [
+     {"speaker": "doug", "text": "Book the dentist! Order pizza!", "file": "voice/01-1.mp3"},
+     {"speaker": "ellie", "text": "It can talk about all of that. It can't do any of it.", "file": "voice/01-2.mp3"}
+   ],
+   "caption": "Your AI can talk. Can it do?"}
+]
+```
+- `cast` on a beat lists who is in that picture (default: everyone with `"always": true`, or the single presenter).
+- `location` with a plate: the plate is sent as a reference picture and the layout guide is skipped for that scene.
+- `lines` replace `voice`/`line` for dialogue (or a narrating character). Lines without `"at"` are placed one after another
+  with a short gap; `fit_beats.py` stretches the scene to fit. The .srt shows speaker names when several people speak.
+- `"loop": false` (free) clips have no last-frame lock: characters can act a whole gag. Use `clip_seconds` up to 15.
+- `"caption_box": "tv"` gives bold yellow subtitles with a thick black outline (TV look).
+- The old single `"character"` field still works; it is treated as a cast of one.
+
 ## Text objects
 ```json
 "headline": {

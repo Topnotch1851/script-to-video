@@ -1,0 +1,24 @@
+[
+ {
+  "name": "cast-sheet",
+  "endpoint_id": "fal-ai/nano-banana-2",
+  "input": {
+   "prompt": "Character reference sheet for an animation, plain light-grey background, no scene. 3 characters in a row, each shown in a front view and a three-quarter view, all at the same scale: 1) Rita: a cheerful bakery owner in her forties with a flour-dusted pink apron, curly red hair in a bun and a pencil behind one ear. 2) Max: her 12-year-old son, small and calm, round green glasses, a yellow hoodie, always holding a phone. 3) Pebble: a smooth grey pebble-shaped robot the size of a cat, with a glowing teal ring for a face and two tiny arms. Below them, a row of small head close-ups for each character showing four expressions: happy, surprised, thinking, talking. No labels. Style: flat cel-shaded TV sitcom animation, rounded soft characters with oversized heads, big oval eyes with small dot pupils, thick even black outlines, flat colours with almost no shading, clean flat pastel backgrounds, simple furniture, even sitcom lighting, wide level camera, original characters only. No text, no letters, no numbers, no symbols, no logos, no writing anywhere, including on signs, books, screens, paper, clothing and flags.",
+   "aspect_ratio": "16:9",
+   "resolution": "2K",
+   "num_images": 1,
+   "output_format": "png"
+  }
+ },
+ {
+  "name": "location-bakery",
+  "endpoint_id": "fal-ai/nano-banana-2",
+  "input": {
+   "prompt": "Establishing shot of the bakery back office with no characters in it. A small back office behind a bakery: a cluttered desk with an old laptop, shelves of flour sacks, a window into the shop with cakes on display, sticky notes all over the wall and the laptop. Wide, level camera. The picture is one continuous scene that fills the WHOLE canvas evenly from the top edge to the bottom edge with detail all the way to the edges: no bands, no panels, no faded or blurred strips, no borders, no frames, no empty boxes, no split screens. Style: flat cel-shaded TV sitcom animation, rounded soft characters with oversized heads, big oval eyes with small dot pupils, thick even black outlines, flat colours with almost no shading, clean flat pastel backgrounds, simple furniture, even sitcom lighting, wide level camera, original characters only. No text, no letters, no numbers, no symbols, no logos, no writing anywhere, including on signs, books, screens, paper, clothing and flags.",
+   "aspect_ratio": "9:16",
+   "resolution": "1K",
+   "num_images": 1,
+   "output_format": "png"
+  }
+ }
+]

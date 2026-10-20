@@ -11,6 +11,13 @@
 
 Clips arrive with their own ambient sound. `assemble.py` keeps it quietly as room tone (`ambience_db`, default −36 dB).
 
+## Loop or free
+- **Loop** (default): first and last frame are the same picture. The subject does one simple action and returns to the
+  start. Safest for presenters and teaching; clips repeat seamlessly if the scene is longer than the clip.
+- **Free** (`"loop": false`): no last frame. Use for acting scenes where something happens — a gag, a reaction, an object
+  arriving. Give `clip_seconds` (up to 15) for longer actions, describe the action in order ("jabs the remote three times,
+  slumps back, Ellie raises an eyebrow"), keep the camera mostly locked. Review these more carefully for drifting faces.
+
 ## Motion prompts
 `prompt_pack.py` writes them to `prompts/fal-clips.json` and `prompts/ANIMATION-PROMPTS.md`:
 one simple action + the fixed tail ("Locked camera, fixed shot … returns to the starting pose at the end").

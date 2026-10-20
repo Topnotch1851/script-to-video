@@ -1,0 +1,58 @@
+[
+ {
+  "index": 1,
+  "endpoint_id": "minimax/h3-max-turbo/image-to-video",
+  "input": {
+   "prompt": "Rita peels sticky notes off her arms one by one, more fall from the wall, Max sighs. Mostly locked camera. Characters act with their whole bodies; their designs, faces, clothes and colours never change. No new characters, no text appears.",
+   "image_url": "{PICTURE_URL_1}",
+   "duration": 7,
+   "resolution": "768P",
+   "prompt_expansion_mode": "disabled"
+  }
+ },
+ {
+  "index": 2,
+  "endpoint_id": "minimax/h3-max-turbo/image-to-video",
+  "input": {
+   "prompt": "Max taps the phone and the keys light up one after another, Rita leans in. Mostly locked camera. Characters act with their whole bodies; their designs, faces, clothes and colours never change. No new characters, no text appears.",
+   "image_url": "{PICTURE_URL_2}",
+   "duration": 7,
+   "resolution": "768P",
+   "prompt_expansion_mode": "disabled"
+  }
+ },
+ {
+  "index": 3,
+  "endpoint_id": "minimax/h3-max-turbo/image-to-video",
+  "input": {
+   "prompt": "Pebble rolls along the rows hanging keys, then turns and holds up the golden key. Mostly locked camera. Characters act with their whole bodies; their designs, faces, clothes and colours never change. No new characters, no text appears.",
+   "image_url": "{PICTURE_URL_3}",
+   "duration": 7,
+   "resolution": "768P",
+   "prompt_expansion_mode": "disabled"
+  }
+ },
+ {
+  "index": 4,
+  "endpoint_id": "minimax/h3-max-turbo/image-to-video",
+  "input": {
+   "prompt": "Rita taps one button, the laptop screen turns green, she throws her arms up happily. Mostly locked camera. Characters act with their whole bodies; their designs, faces, clothes and colours never change. No new characters, no text appears.",
+   "image_url": "{PICTURE_URL_4}",
+   "duration": 7,
+   "resolution": "768P",
+   "prompt_expansion_mode": "disabled"
+  }
+ },
+ {
+  "index": 5,
+  "endpoint_id": "minimax/h3-max-turbo/image-to-video",
+  "input": {
+   "prompt": "Max nods once and points down at the bottom of the frame. Locked camera, fixed shot. Every character keeps the same face, body, clothes and colours. Nothing new appears, no text appears. Everyone returns to the starting pose at the end.",
+   "image_url": "{PICTURE_URL_5}",
+   "duration": 7,
+   "resolution": "768P",
+   "prompt_expansion_mode": "disabled",
+   "end_image_url": "{PICTURE_URL_5}"
+  }
+ }
+]
