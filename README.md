@@ -11,6 +11,17 @@ people or your own footage.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
+<table>
+<tr>
+<td align="center"><img src="docs/images/hitap-ep1.gif" width="230" alt="Hi Tap Ep. 1 preview"><br><b>Your Phone Is a Slot Machine</b><br>31 s · $0.96 · <a href="docs/videos/hitap-ep1-your-phone-is-a-slot-machine.mp4">full video</a></td>
+<td align="center"><img src="docs/images/hitap-ep2.gif" width="230" alt="Hi Tap Ep. 2 preview"><br><b>Why the Milk Is at the Back</b><br>27 s · $0.58 · <a href="docs/videos/hitap-ep2-why-the-milk-is-at-the-back.mp4">full video</a></td>
+<td align="center"><img src="docs/images/hitap-ep3.gif" width="230" alt="Hi Tap Ep. 3 preview"><br><b>You're Not Lazy</b><br>21 s · $0.47 · <a href="docs/videos/hitap-ep3-youre-not-lazy.mp4">full video</a></td>
+</tr>
+</table>
+
+*Three real Shorts made with this skill: pictures made by the creator from the skill's prompts, animation, voice,
+music, captions and sound all produced by the skill. Previews are silent; open "full video" for sound.*
+
 ---
 
 ## What you get
@@ -42,13 +53,13 @@ people or your own footage.
   - *Mixed*: animate only the moments that matter.
 - **Proper sound**: AI narration (or your recording), new music (or yours, or none) that automatically drops under the
   voice, free synthesised sound effects, room ambience, broadcast-correct loudness, and separate sound tracks for CapCut.
-- **On-screen text only if you want it**: none, subtitles, key words, or teaching words with timed colour changes.
+- **On-screen text only if you want it**: none, subtitles, key words, or teaching words with timed colour changes
+  ([see the options](docs/images/text-modes.png)).
 - **A ready-to-post package**: the video, a captions file (.srt), thumbnails, YouTube chapters, and **SOCIAL.md** with
   captions, hashtags, titles, descriptions and tags for Instagram, TikTok, YouTube (Shorts and long-form) and Facebook.
 - **Checks at every step**: pictures are checked for text, bands and wrong shapes; the final video is checked for length,
   timing, loudness and spelling (frame grabs at every text change).
 
-![On-screen text options: none, subtitles, key words, teaching](docs/images/text-modes.png)
 
 ## What it costs
 
@@ -66,6 +77,8 @@ Music: new (+$0.08 a track), your own, or none. Your own pictures + your own voi
 Camera moves, text, effects, mixing, loudness, thumbnails, captions and packaging are always free and local.
 
 ### Real videos made with it
+![Frames from the three Hi Tap episodes](docs/images/real-videos.jpg)
+
 | Video | Length | How | Cost |
 |---|---|---|---|
 | Hi Tap Ep. 1 — Your Phone Is a Slot Machine | 31 s, 7 scenes | own pictures, Budget animation, voice, no music | $0.96 (incl. $0.35 on a dropped test style) |

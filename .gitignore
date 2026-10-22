@@ -10,3 +10,4 @@ deliver/
 *.mp3
 dist/
 .ruff_cache/
+!docs/videos/*.mp4
