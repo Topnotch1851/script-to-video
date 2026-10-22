@@ -8,7 +8,7 @@ usage: fit_beats.py SHOTLIST.json [--min 5] [--max 12] [--tail 0.6] [--step 0.5]
 """
 import os, sys, json, math, argparse
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import load_shotlist, voice_plan
+from common import load_shotlist, voice_plan, span_seconds
 
 
 def main():
@@ -20,13 +20,14 @@ def main():
     S = load_shotlist(A.shotlist)
     raw = json.load(open(A.shotlist))
     total = 0.0
-    for b, r in zip(S["beats"], raw["beats"]):
+    for bi, (b, r) in enumerate(zip(S["beats"], raw["beats"])):
         if b.get("voice") or b.get("lines"):
             plan = voice_plan(b)                       # one narrator, or several dialogue lines in turn
             if not plan:
                 print(f"beat {b['id']}: no voice audio found"); total += b["seconds"]; continue
             end = plan[-1][3]
-            need = end + max(A.tail, b.get("answer_gap", 0))
+            extra = span_seconds(S, bi) - b["seconds"]  # following "continues" pictures share this line
+            need = end + max(A.tail, b.get("answer_gap", 0)) - extra
             sec = max(A.min, math.ceil(need / A.step) * A.step)
             flag = "  <-- long line: split it across two pictures" if sec > A.max else ""
             print(f"beat {b['id']:3d}: speech ends {end:.2f}s ({len(plan)} line(s)) -> {sec:.1f}s{flag}")

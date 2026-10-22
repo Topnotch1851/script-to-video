@@ -29,7 +29,7 @@ def main():
     srt = os.path.splitext(A.final)[0] + ".srt"
     if os.path.exists(srt):
         shutil.copy2(srt, os.path.join(dst, f"{slug}.srt"))
-    for d in ("pictures", "clips", "voice", "music", "prompts", "thumbnails"):
+    for d in ("pictures", "clips", "voice", "music", "prompts", "thumbnails", "stems"):
         src = os.path.join(root, d)
         if os.path.isdir(src) and os.listdir(src):
             shutil.copytree(src, os.path.join(dst, d))

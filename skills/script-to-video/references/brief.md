@@ -3,14 +3,28 @@
 The brief is the "master prompt" for one video, written BY the skill. It is what an expert creative director would hand
 to a production team: format, audience, angle, style lock, cast, locations, every scene (picture, action, words,
 caption), sound, cost and the approval gates. The person approves the brief before anything is paid for.
-Template: `templates/BRIEF-template.md`. Save it as `BRIEF.md` in the project and give it to the person: they can
-edit it, reuse it, and hand it back later ("make another one like this").
+Template: `architect.md` (the built-in master prompt). Fill it in, save it as `BRIEF.md` in the project and give it to
+the person: they can edit it, reuse it, and hand it back later ("make another one like this").
+
+## Director mode (when the person pastes a full production prompt)
+Their prompt is the brief. Copy into the shot list, word for word: the style lock (`style_lock`), cast and location
+descriptions, every scene prompt (`beats[].picture_prompt`), every clip prompt (`beats[].clip_prompt`), every line,
+every caption, scene lengths and which references each scene uses. `prompt_pack.py` then sends their words unchanged,
+adding only the reference-image lines and the no-text rule. Fix only what `prompt-fixer.md` lists (and list each fix).
+Their model choices become the suggested quality level; still show the menu with prices.
 
 ## Four ways in (all end in a brief)
 | The person gives you | You do |
 |---|---|
 | A finished script | Keep their words. Ask the open intake questions. Design the scenes around the script. |
-| Only a topic, an idea or a description ("a video about agent rooms") | Ask the creative questions below, then write the script AND the brief. Offer 2 hook options if the angle is open. |
+| Only a topic, an idea or a description ("a video about agent rooms") | **Research first** (below), ask the creative questions, write the script and show it with its sources; once they approve the script, arrange it into the brief like any script. |
+
+## Research (topic-only requests, free)
+1. Run 2–4 web searches: the facts and the simple explanation, common myths, what similar short videos say, and one
+   surprising detail for the hook. Prefer primary or reputable sources; never invent statistics or quotes.
+2. Write 2 hook options and the script (one idea per scene, fitting the length).
+3. Show the script with a short "Sources" list and ask: **"Approve the script, or what should change?"** Wait.
+4. Only then arrange it into the brief (`architect.md`) and ask the production questions.
 | A production prompt (theirs, old, or from someone else) | Run `prompt-fixer.md`, keep their creative choices, turn it into a brief, list what you changed. |
 | "Another one like X" (an earlier brief, episode or series bible) | Reuse its locks (style, cast, voices, layout, price band), change the topic, keep series rules (`series.md`). |
 

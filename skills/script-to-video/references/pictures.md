@@ -27,6 +27,12 @@ Two routes. Both end the same way: numbered files in `pictures/` (`01.png`, `02.
 
 ## Route B — made by the person, anywhere
 
+**Same prompts, no differences.** Route B uses exactly the prompts Route A would send: `prompt_pack.py` writes
+`PICTURE-PROMPTS.md` and `fal-pictures.json` from the same function, so the words, the reference pictures and their order
+(cast sheet = Image 1, location picture or layout guide = Image 2), the shape and the style lock are identical. Step 0
+(cast sheet, location pictures) comes first, and every scene says which references to attach. Tell the person to paste
+the prompts unchanged, ideally into the same model family (Nano Banana), and to keep the file.
+
 1. `python3 KIT/scripts/prompt_pack.py shotlist.json` → send `prompts/PICTURE-PROMPTS.md`, `layout-guide.png`
    and the character sheet (if any). The file explains everything: shape, reference images, naming, upload.
 2. They make the pictures in any tool and either **attach them in the chat**, or put them in a **Google Drive folder**

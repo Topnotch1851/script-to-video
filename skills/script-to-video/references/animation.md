@@ -1,6 +1,16 @@
 # Animation
 
-## Settings that work (`minimax/h3-max-turbo/image-to-video`)
+## Premium motion: Kling 2.6 Pro (`fal-ai/kling-video/v2.6/pro/image-to-video`, $0.07/s)
+| Field | Value | Why |
+|---|---|---|
+| `start_image_url` | the picture's URL | first frame |
+| `end_image_url` | the same URL for *loop* scenes; the next picture for *chain* scenes; none for free acting | keeps characters on-model |
+| `duration` | `"5"` or `"10"` (strings, nothing else) | scenes up to 7 s use 5 s and hold/loop; longer use 10 s |
+| `generate_audio` | `false` | Kling would add its own voices; the skill builds the soundtrack |
+| `negative_prompt` | "blur, distortion, extra limbs, extra characters, morphing faces, new text appearing, morphing text, garbled letters, photorealism, colour shifts, camera shake" | the locks proven in hand-written director prompts |
+Kling handles multi-step acting (jabs, slumps, objects arriving) better than MiniMax; describe the action in order.
+
+## Budget motion: settings that work (`minimax/h3-max-turbo/image-to-video`)
 | Field | Value | Why |
 |---|---|---|
 | `image_url` | the picture's URL | first frame |

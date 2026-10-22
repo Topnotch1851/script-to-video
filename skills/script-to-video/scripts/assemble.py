@@ -16,7 +16,7 @@ usage: assemble.py SHOTLIST.json OUT.mp4 [--preview] [--jobs 3] [--reuse]
 import sys, os, json, argparse, subprocess, concurrent.futures as cf
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import load_shotlist, decode_audio, write_wav, speech_bounds, rms_db, has_audio, SR, FFMPEG, voice_plan
+from common import load_shotlist, decode_audio, write_wav, speech_bounds, rms_db, has_audio, SR, FFMPEG, voice_plan, span_seconds
 import build_beat, sfx as SFX
 
 
@@ -108,14 +108,15 @@ def main():
     n = int(round(total * SR))
     voice, amb, fx = (np.zeros((n, 2), np.float32) for _ in range(3))
     timeline = []
-    for b in S["beats"]:
+    for bi, b in enumerate(S["beats"]):
         rec = {"id": b["id"], "start": b["_start"], "seconds": b["seconds"], "voice": None, "lines": []}
         plan = voice_plan(b)                      # one narrator file, or several dialogue lines in turn
+        span = span_seconds(S, bi)                # the line may run on into following "continues" pictures
         for f, start, on, end, speaker, text in plan:
             v = decode_audio(f)
-            room = b["seconds"] - start
+            room = span - start
             if len(v) > room * SR:
-                print(f"WARNING beat {b['id']}: a line runs past the end of the beat ({start + len(v)/SR:.2f}s > {b['seconds']:.2f}s); it will be cut")
+                print(f"WARNING beat {b['id']}: a line runs past the end of the beat ({start + len(v)/SR:.2f}s > {span:.2f}s); it will be cut")
                 v = v[:int(room * SR)]
             place(voice, v, b["_start"] + start)
             rec["lines"].append({"speaker": speaker, "text": text, "on": round(on, 3), "end": round(end, 3)})
@@ -151,7 +152,13 @@ def main():
         loud = np.abs(voice.mean(1)) > 0.01
         v_db = rms_db(voice[loud]) if loud.any() else -20.0
         bed = bed * 10 ** ((v_db + S["music_db"] - rms_db(bed)) / 20)
-        mix += bed * duck_gain(voice, S["duck_db"])
+        bed = bed * duck_gain(voice, S["duck_db"])
+        mix += bed
+    if not A.preview:                             # separate tracks for editing in CapCut / Premiere / DaVinci
+        sd = os.path.join(S["_root"], "stems"); os.makedirs(sd, exist_ok=True)
+        for name, x in (("voice", voice), ("effects", fx), ("room-sound", amb), ("music", bed)):
+            if x is not None and np.abs(x).max() > 0:
+                write_wav(os.path.join(sd, f"{name}.wav"), x)
     raw = os.path.join(work, "mix.wav"); norm = os.path.join(work, "mix-norm.wav")
     peak = np.abs(mix).max()
     write_wav(raw, mix / peak * 0.9 if peak > 0.9 else mix)

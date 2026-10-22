@@ -56,7 +56,10 @@ Animated clips bring their own room sound; it is levelled to `ambience_db` (defa
 gentle, even background. Own footage with real sound: `"clip_audio": "full"`.
 
 ## Mix and loudness (assemble.py does all of this)
-- Speech leads. Music sits `music_db` (−14 dB) under the voice and ducks a further `duck_db` (8 dB) while anyone speaks.
+- Speech leads. Music sits `music_db` (−10 dB) under the voice and dips a further `duck_db` (4 dB) while anyone speaks
+  (the level preferred in real episodes; use −14/8 for very calm or children's content).
+- Separate tracks (`stems/voice.wav`, `music.wav`, `effects.wav`, `room-sound.wav`) are written with every final mix
+  for editing in CapCut or any editor.
 - Effects peak about 18 dB under full scale.
 - Final loudness `loudness` −16 LUFS integrated, true peak −1.5 dBTP (social apps and YouTube normalise near −14,
   so this plays at full level with headroom).

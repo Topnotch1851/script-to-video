@@ -8,7 +8,8 @@ rule here; then say so and offer the fix.
 ## Checklist (fix every item that applies)
 | Found in the prompt | Replace with |
 |---|---|
-| Other picture/video/voice/music models or old prices | the endpoints and live prices in `costs.md` (keep theirs only if they insist; then quote at their prices) |
+| Picture/video models named in the prompt (e.g. Nano Banana Pro, Kling 2.6 Pro) | keep them as the suggested level, but show the quality menu with live prices and let the person choose (never swap silently) |
+| Old prices | live prices from `get_pricing` |
 | A fixed money cap (e.g. "$8 per video") | a cap from the live quote: expected total + 15% reserve |
 | "Leave the top third / bottom fifth empty", "blank paper zones" | layout guide image + "fills the whole canvas" (blank-zone prompts produced hard bands) |
 | Words, letters or numbers drawn by the model | removed; text is added at assembly, and only if the chosen text mode needs it |
@@ -32,6 +33,6 @@ rule here; then say so and offer the fix.
 
 ## Output format
 1. **What I changed** — 5–12 bullets, plain words.
-2. **The corrected prompt** — in the structure of `MASTER-PROMPT.md` with the script and answers filled in.
+2. **The corrected plan** — `architect.md` filled in (saved as `BRIEF.md`), their creative words kept word for word.
 3. **Quote** — from `plan_costs.py`.
 4. Ask: "Approve the corrected prompt and budget?"

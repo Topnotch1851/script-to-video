@@ -56,6 +56,26 @@
 ```
 (Comments are for reading only; the real file is plain JSON.)
 
+## Models, director mode, long lines, chained shots
+```json
+"picture_model": "standard",            // standard (Nano Banana 2, 1K) | pro (Nano Banana Pro, 2K)
+"motion_model": "standard",             // standard (MiniMax H3) | pro (Kling 2.6 Pro, 5/10 s clips)
+"negative_prompt": "…",                 // optional, Kling only
+"beats": [
+  {"id": 3, "seconds": 5, "line": "A long line that needs two pictures…", "voice": "voice/03.mp3",
+   "picture_prompt": "Doug kneels by the wall socket in a bathrobe, sweating… STYLE: …",   // director mode: word for word
+   "clip_prompt": "Doug jams the shaver plug at the socket… Flat 2D sitcom animation."},   // director mode
+  {"id": 4, "seconds": 5, "continues": true, "picture_prompt": "…second half of the same moment…"},
+  {"id": 5, "seconds": 4, "chain": true}   // clip runs from this picture to the NEXT picture: one continuous shot
+]
+```
+- `continues: true` = this picture shows the second half of the previous scene's line (scene 3a/3b). It has no voice
+  of its own; the previous line may run on into it.
+- `chain: true` = the clip starts on this scene's picture and ends on the next scene's picture, so the animation flows
+  as one continuous shot through the video (the last scene loops). Best when every scene is the same room.
+- `clip_audio`: the clip's own sound — `"ambience"` (default), `"off"` (mute: generated clips sometimes contain crowd
+  noise or invented speech; mute those), or `"full"` (your own footage).
+
 ## Several characters, locations and dialogue
 ```json
 "voice": "Rachel",                       // default narrator voice

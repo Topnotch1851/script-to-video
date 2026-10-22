@@ -75,8 +75,8 @@ def load_shotlist(path):
     S.setdefault("colors", {})
     S["colors"] = {**NAMED, **S["colors"]}
     S.setdefault("loudness", -16.0)
-    S.setdefault("music_db", -14.0)      # music level relative to the voice, before ducking
-    S.setdefault("duck_db", 8.0)
+    S.setdefault("music_db", -10.0)      # music level relative to the voice, before ducking (preferred in real use)
+    S.setdefault("duck_db", 4.0)         # extra dip while someone speaks
     S.setdefault("sfx_db", -6.0)
     S.setdefault("ambience_db", -36.0)
     S.setdefault("auto_sfx", True)
@@ -108,6 +108,17 @@ def load_shotlist(path):
     S.setdefault("cast", [])
     S.setdefault("locations", [])
     return S
+
+
+def span_seconds(S, i):
+    """Seconds a beat's voice may use: the beat itself plus any following beats marked "continues": true
+    (a long line spread over two or more pictures, e.g. scene 3a + 3b)."""
+    beats = S["beats"]
+    total = beats[i]["seconds"]
+    j = i + 1
+    while j < len(beats) and beats[j].get("continues"):
+        total += beats[j]["seconds"]; j += 1
+    return total
 
 
 def voice_plan(b, gap=0.25):

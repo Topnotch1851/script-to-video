@@ -58,7 +58,8 @@ def build(S, bid, out):
     pipe_frames = None
     if beat.get("clip"):
         # loop: generated clips start and end on the same picture, so they repeat seamlessly; hold: freeze last frame (own footage)
-        fit = beat.get("clip_fit", "loop")
+        looped = (not beat.get("chain")) and beat.get("loop", S.get("motion_style", "loop") == "loop")
+        fit = beat.get("clip_fit", "loop" if looped else "hold")   # free acting clips hold their last frame
         vin = (["-stream_loop", "-1"] if fit == "loop" else []) + ["-i", beat["clip"]]
         hold = f"tpad=stop_mode=clone:stop_duration={D}," if fit != "loop" else ""
         start = beat.get("clip_start", 0)

@@ -27,7 +27,13 @@ TAIL_LOOP = ("Locked camera, fixed shot. Every character keeps the same face, bo
              "Nothing new appears, no text appears. Everyone returns to the starting pose at the end.")
 TAIL_FREE = ("Mostly locked camera. Characters act with their whole bodies; their designs, faces, clothes and colours "
              "never change. No new characters, no text appears.")
+TAIL_CHAIN = ("Locked camera, fixed wide shot, no zoom; the place and furniture stay where they are. Characters keep the "
+              "same faces, bodies, clothes and colours. Mouths closed, not talking. Nothing written appears anywhere. "
+              "The shot ends exactly on the last frame.")
 cap = lambda s: s[:1].upper() + s[1:] if s else s
+PRICES = json.load(open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "prices.json")))
+KLING_NEGATIVE = ("blur, distortion, extra limbs, extra characters, morphing faces, new text appearing, morphing text, "
+                  "garbled letters, photorealism, colour shifts, camera shake")
 
 
 def cast_in(S, b):
@@ -97,6 +103,11 @@ def picture_prompt(S, b, refs):
         parts.append("In this picture: " + " ".join(describe(c) for c in people))
     if loc and not any(k == "plate" for k, _ in refs):
         parts.append(f"Location, {loc.get('name', loc['id'])}: {cap(loc['description'].rstrip('.'))}.")
+    if b.get("picture_prompt"):                   # director mode: the person's own scene prompt, word for word
+        parts.append(b["picture_prompt"])
+        if "no text" not in b["picture_prompt"].lower():
+            parts.append(NO_TEXT)
+        return "\n\n".join(parts)
     parts.append("Scene: " + cap(b.get("scene", "").rstrip(".")) + "." +
                  (" " + cap(b["action"].rstrip(".")) + "." if b.get("action") else ""))
     if b.get("subject_size") == "small":
@@ -133,7 +144,13 @@ def plate_prompt(S, loc):
 
 def motion_prompt(S, b):
     loop = b.get("loop", S.get("motion_style", "loop") == "loop")
+    if b.get("chain"):
+        loop = False
+    if b.get("clip_prompt"):                      # director mode: the person's own clip prompt, word for word
+        return b["clip_prompt"], loop
     m = b.get("motion") or "gentle idle movement: the characters breathe, blink and shift weight slightly"
+    if b.get("chain"):
+        return ("Continuous shot in the same place. " + m.rstrip(".") + ". " + TAIL_CHAIN), loop
     return m.rstrip(".") + ". " + (TAIL_LOOP if loop else TAIL_FREE), loop
 
 
@@ -172,8 +189,13 @@ def main():
     if plates_needed:
         refs_txt.append("the **location picture** for that scene")
     refs_txt.append("the **layout guide** (`layout-guide.png`) when a scene has no location picture")
+    PMs = PRICES["picture"][S.get("picture_model", "standard")]
     L = [f"# Picture prompts — {S.get('title', 'video')}", "",
          f"**{n} pictures**, shape **{asp}** ({S['_fmt']['W']}x{S['_fmt']['H']} or larger, same shape).", "",
+         f"These are **exactly** the prompts this production sends to {PMs['label']} when it makes the pictures itself: "
+         f"same words, same reference pictures in the same order, same shape. Paste them unchanged (best results with the "
+         f"same model, e.g. Nano Banana in Gemini or on fal) so your pictures match the plan with no differences. "
+         f"Keep this file: it is how the pictures can be re-made later.", "",
          "## How to make them", "",
          "1. Use any image tool you like (free or paid). Set the shape to **" + asp + "** before you start.",
          "2. Make the Step 0 reference pictures first (if any). Keep them; they are reused for every scene and every future video.",
@@ -204,36 +226,52 @@ def main():
     L = [f"# Animation prompts — {S.get('title', 'video')}", "",
          "For any image-to-video tool. Use the picture as the FIRST frame. For beats marked *loop*, also use the SAME picture "
          "as the LAST frame (the clip loops cleanly and characters stay on-model). Beats marked *free* have no last frame.", ""]
+    PM = PRICES["picture"][S.get("picture_model", "standard")]
+    MM_KEY = S.get("motion_model", "standard")
     clips = []
     for b in S["beats"]:
         if S.get("motion_mode", "still") == "still" or b.get("still"):
             continue
         p, loop = motion_prompt(S, b)
-        dur = max(2, min(15, round(b.get("clip_seconds", b["seconds"]))))
-        L += [f"### {b['id']:02d}.mp4 (from {b['id']:02d}.png, {dur} s, {'loop' if loop else 'free'})", "", "```", p, "```", ""]
-        inp = {"prompt": p, "image_url": f"{{PICTURE_URL_{b['id']}}}", "duration": dur, "resolution": "768P",
-               "prompt_expansion_mode": "disabled"}
-        if loop:
+        want = b.get("clip_seconds", b["seconds"])
+        if MM_KEY == "pro":                       # Kling 2.6 Pro: 5 or 10 s only, no own soundtrack, negative prompt
+            dur = 5 if want <= 7 else 10          # up to 7 s: a 5 s clip, then held/looped (cheaper than paying for 10 s)
+            inp = {"prompt": p, "start_image_url": f"{{PICTURE_URL_{b['id']}}}", "duration": str(dur),
+                   "generate_audio": False, "negative_prompt": S.get("negative_prompt", KLING_NEGATIVE)}
+        else:                                     # MiniMax H3: 2-15 s, keeps its own room sound
+            dur = max(2, min(15, round(want)))
+            inp = {"prompt": p, "image_url": f"{{PICTURE_URL_{b['id']}}}", "duration": dur, "resolution": "768P",
+                   "prompt_expansion_mode": "disabled"}
+        nxt = next((x for x in S["beats"][S["beats"].index(b) + 1:]), None)
+        if b.get("chain") and nxt:                # continuous shot: this picture -> the next picture
+            inp["end_image_url"] = f"{{PICTURE_URL_{nxt['id']}}}"
+            mode = f"chain: last frame {nxt['id']:02d}.png"
+        elif loop:
             inp["end_image_url"] = f"{{PICTURE_URL_{b['id']}}}"
-        clips.append({"index": b["id"], "endpoint_id": "minimax/h3-max-turbo/image-to-video", "input": inp})
+            mode = "loop: last frame = same picture"
+        else:
+            mode = "free: no last frame"
+        L += [f"### {b['id']:02d}.mp4 (first frame {b['id']:02d}.png, {dur} s, {mode})", "", "```", p, "```", ""]
+        clips.append({"index": b["id"], "endpoint_id": PRICES["animation"][MM_KEY]["endpoint"], "input": inp})
     open(os.path.join(out, "ANIMATION-PROMPTS.md"), "w").write("\n".join(L))
     # ---------- fal job lists ----------
+    res = PM["resolution"]
     refs_jobs = []
     if sheet_needed:
-        refs_jobs.append({"name": "cast-sheet", "endpoint_id": "fal-ai/nano-banana-2",
+        refs_jobs.append({"name": "cast-sheet", "endpoint_id": PM["t2i"],
                           "input": {"prompt": cast_sheet_prompt(S), "aspect_ratio": "16:9" if len(cast) > 2 else asp,
-                                    "resolution": "2K" if len(cast) > 1 else "1K", "num_images": 1, "output_format": "png"}})
+                                    "resolution": "2K" if len(cast) > 1 else res, "num_images": 1, "output_format": "png"}})
     for l in plates_needed:
-        refs_jobs.append({"name": f"location-{l['id']}", "endpoint_id": "fal-ai/nano-banana-2",
-                          "input": {"prompt": plate_prompt(S, l), "aspect_ratio": asp, "resolution": "1K",
+        refs_jobs.append({"name": f"location-{l['id']}", "endpoint_id": PM["t2i"],
+                          "input": {"prompt": plate_prompt(S, l), "aspect_ratio": asp, "resolution": res,
                                     "num_images": 1, "output_format": "png"}})
     pics = []
     for b in S["beats"]:
         refs = refs_for(S, b)
         urls = [u for _, u in refs]
-        pics.append({"index": b["id"], "endpoint_id": "fal-ai/nano-banana-2/edit" if urls else "fal-ai/nano-banana-2",
+        pics.append({"index": b["id"], "endpoint_id": PM["endpoint"] if urls else PM["t2i"],
                      "input": {"prompt": picture_prompt(S, b, refs), **({"image_urls": urls} if urls else {}),
-                               "aspect_ratio": asp, "resolution": "1K", "num_images": 1, "output_format": "png"}})
+                               "aspect_ratio": asp, "resolution": res, "num_images": 1, "output_format": "png"}})
     voice = voice_jobs(S)
     for name, data in (("fal-references.json", refs_jobs), ("fal-pictures.json", pics), ("fal-clips.json", clips),
                        ("fal-voice.json", voice)):

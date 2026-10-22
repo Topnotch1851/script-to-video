@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.1.0 — 2026-10-22
+- The master prompt is now built into the skill as its architect (`references/architect.md`); no prompt to paste.
+  Give it a topic or a script.
+- Topic-only requests: web research, a script with sources, and script approval before planning.
+- Quality menu with live prices for every level: Nano Banana 2 or Nano Banana Pro pictures, MiniMax H3 or
+  Kling 2.6 Pro animation, for still and animated videos.
+- Director mode: a pasted production prompt keeps its scene, clip and line wording word for word.
+- Make-your-own-pictures prompts are exactly the prompts the skill would use (same words, references, order, shape).
+- Chained shots (each clip runs from one picture to the next), long lines over two pictures (`continues`),
+  Kling settings (5/10 s, negative prompt, no generated audio).
+- Separate sound tracks for CapCut; music default -10 dB under the voice, dipping 4 dB.
+- Lessons from three real episodes made for $0.47-$0.96 each.
+
 ## 1.0.0 — 2026-10-20
 First public release.
 - Skill + Claude Code plugin + master prompt.

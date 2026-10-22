@@ -10,7 +10,7 @@ usage: qc.py SHOTLIST.json VIDEO.mp4
 import os, sys, json, subprocess
 from PIL import Image, ImageDraw
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import load_shotlist, probe_duration, FFMPEG
+from common import load_shotlist, probe_duration, FFMPEG, span_seconds
 from overlay import change_times
 
 
@@ -29,17 +29,18 @@ def main():
     print(f"planned {S['_total']:.2f}s | video {dv:.2f}s | audio {da:.2f}s")
     if abs(dv - S["_total"]) > 0.1 or abs(da - S["_total"]) > 0.1:
         problems.append("length mismatch")
-    for b, rec in zip(S["beats"], tl["beats"]):
+    for bi, (b, rec) in enumerate(zip(S["beats"], tl["beats"])):
         if not (b.get("voice") or b.get("lines")):
             continue
         if not rec["voice"]:
             problems.append(f"beat {b['id']}: voice file is silent"); continue
         on, end = rec["voice"]
         gap = b.get("answer_gap", 0.4)
+        span = span_seconds(S, bi)               # includes following "continues" pictures
         ok_on = on - b["voice_at"] <= 0.3
-        ok_end = end <= b["seconds"] - gap
+        ok_end = end <= span - gap
         flag = "" if ok_on and ok_end else "  <-- " + ("late start " if not ok_on else "") + ("too long " if not ok_end else "")
-        print(f"beat {b['id']:3d}: speech {on:.2f}-{end:.2f}s of {b['seconds']:.2f}s (needs end <= {b['seconds'] - gap:.2f}){flag}")
+        print(f"beat {b['id']:3d}: speech {on:.2f}-{end:.2f}s of {span:.2f}s (needs end <= {span - gap:.2f}){flag}")
         if flag:
             problems.append(f"beat {b['id']}:{flag.strip(' <-')}")
     I, TP = loudness(video)

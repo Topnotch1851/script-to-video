@@ -23,3 +23,12 @@ this list explains why, so nobody "simplifies" them away.
 | Social captions/tags were forgotten in the handoff | SOCIAL.md for every platform is part of every delivery |
 | Resubmitting a slow job charged twice | Check the request id; never resubmit |
 | Costs ran well over plan on an early video | Quote first, cap = quote + 15%, report at every gate, stop at the cap |
+| $0.35 was spent on a painted look that was dropped for line art | Agree the drawing style on one sample picture before paying for reference pictures |
+| Picture prompts written only in the chat were lost; the pictures could not be re-made | Always write `prompts/PICTURE-PROMPTS.md` and deliver it, even when the pictures are made here |
+| A generated clip zoomed in by itself and pushed the character into the subtitles | Replace that scene with its still picture and a gentle push-in (free) instead of paying for a retake |
+| A clip invented garbled writing at the bottom of the frame | Patch it locally with the clip's own clean background, or use the still for that scene |
+| Clips came with crowd noise and invented speech | Listen to every clip; set `clip_audio: "off"` on any clip with voices in it |
+| Converting 24 fps clips to 30 fps made the motion stutter | Use the clips' own frame rate for the whole video (`"fps": 24`) |
+| Separate loop clips felt choppy in a one-room story | Chain the clips (`"chain": true`): each clip runs from one picture to the next, one continuous shot |
+| Music at −14 dB felt too quiet for social video | Default −10 dB under the voice, dipping 4 dB while speaking |
+| Long subtitle lines were hard to read | Split subtitles at the voice's pauses; dark handwriting on paper styles, placed low |

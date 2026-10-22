@@ -20,6 +20,14 @@ Suggest from the script: about 2.3 spoken words per second at a normal pace, 1.5
 **3. Style of video?** Show the menu in `styles.md` (one line each). Suggest one from the topic and audience.
 If they name something not on the menu, write a style lock for it in the same pattern.
 
+**4a. Quality level?** Always ask, always with prices, for the motion they chose. Run
+`plan_costs.py --seconds N --references R --menu` and show the table: every model level for animated videos
+(Budget: Nano Banana 2 + MiniMax · Sharper pictures: Nano Banana Pro + MiniMax · Better motion: Nano Banana 2 + Kling 2.6 Pro
+· Premium: Nano Banana Pro + Kling 2.6 Pro) and both picture models for still videos. One line on the difference:
+Pro pictures are richer and sharper (2K); Kling acts out whole scenes more convincingly but costs about 4x per second
+and only makes 5 s or 10 s clips. Suggest Budget for tests and long videos, Premium for hero Shorts.
+Store the answer as `picture_model` / `motion_model` in the shot list.
+
 **4. Still or animated?**
 - **Still**: every picture gets a slow, smooth camera move (zoom/pan) made locally for free. Cheapest.
 - **Animated**: every picture becomes a short animated clip (the subject moves). Costs the most.

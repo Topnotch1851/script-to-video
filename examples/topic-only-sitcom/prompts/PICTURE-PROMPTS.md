@@ -2,6 +2,8 @@
 
 **5 pictures**, shape **9:16** (1080x1920 or larger, same shape).
 
+These are **exactly** the prompts this production sends to Nano Banana 2 (1K) when it makes the pictures itself: same words, same reference pictures in the same order, same shape. Paste them unchanged (best results with the same model, e.g. Nano Banana in Gemini or on fal) so your pictures match the plan with no differences. Keep this file: it is how the pictures can be re-made later.
+
 ## How to make them
 
 1. Use any image tool you like (free or paid). Set the shape to **9:16** before you start.

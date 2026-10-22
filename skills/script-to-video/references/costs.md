@@ -10,7 +10,19 @@
 
 Free: camera moves on stills, text, captions, sound effects, mixing, loudness, thumbnails, packaging, prompt packs.
 
-## Typical totals (from `plan_costs.py --compare`)
+## The quality menu (ask every time; `plan_costs.py --menu`)
+| Level | Pictures | Animation | 30 s animated, pictures made here |
+|---|---|---|---|
+| Budget | Nano Banana 2, 1K — $0.08 | MiniMax H3 — $0.01625/s | about $1.19 |
+| Sharper pictures | Nano Banana Pro, 2K — $0.15 | MiniMax H3 | about $1.68 |
+| Better motion | Nano Banana 2 | Kling 2.6 Pro — $0.07/s (5 or 10 s clips) | about $2.78 |
+| Premium | Nano Banana Pro | Kling 2.6 Pro | about $3.27 |
+| Still | Nano Banana 2 / Pro | free camera moves | about $0.68 / $1.17 |
+Prices checked 2026-10-22 (Nano Banana Pro at 4K costs double). Making the pictures yourself removes the picture cost
+at every level: real 21–31 s animated episodes made that way cost $0.47–$0.96. Music adds $0.08 per new track,
+nothing with their own track or none.
+
+## Typical totals at Budget level (from `plan_costs.py --compare`)
 | 60 s vertical | Pictures made here | Your own pictures |
 |---|---|---|
 | Still | about $1.12 | about $0.16 |
